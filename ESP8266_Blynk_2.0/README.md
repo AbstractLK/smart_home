@@ -1,1 +1,0 @@
-This is smart home application with blynk_2.0
