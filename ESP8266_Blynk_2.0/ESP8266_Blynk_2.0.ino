@@ -14,14 +14,15 @@
  **********************************************************************************/
 
 /* Fill-in your Template ID (only if using Blynk.Cloud) */
-#define BLYNK_TEMPLATE_ID "TMPLP-SWIqcZ"
-#define BLYNK_TEMPLATE_NAME "NodeMCU"
-#define BLYNK_AUTH_TOKEN "qfWWHF_OjvPI3xBqxpfp4orsVeBkJFh0"
+
+#define BLYNK_TEMPLATE_ID ""
+#define BLYNK_TEMPLATE_NAME ""
+#define BLYNK_AUTH_TOKEN ""
 
 // Your WiFi credentials.
 // Set password to "" for open networks.
-char ssid[] = "SLT-Fiber-2.4G";
-char pass[] = "1234five";
+char ssid[] = "";
+char pass[] = "";
 
 bool fetch_blynk_state = true;  //true or false
 
