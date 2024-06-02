@@ -99,6 +99,7 @@ Preferences pref;
 #define VPIN_BUTTON_8    V8
 
 #define VPIN_BUTTON_C    V9
+#define VPIN_BUTTON_D    V10
 // #define VPIN_TEMPERATURE V6
 // #define VPIN_HUMIDITY    V7
 
@@ -205,6 +206,9 @@ BLYNK_WRITE(VPIN_BUTTON_8) {
 
 BLYNK_WRITE(VPIN_BUTTON_C) {
   all_SwitchOff();
+}
+BLYNK_WRITE(VPIN_BUTTON_D) {
+  all_SwitchOn();
 }
 
 void checkBlynkStatus() { // called every 3 seconds by SimpleTimer
@@ -464,9 +468,18 @@ void all_SwitchOff(){
   toggleState_6 = 0; digitalWrite(RelayPin6, HIGH); pref.putBool("Relay6", toggleState_6); Blynk.virtualWrite(VPIN_BUTTON_6, toggleState_6); delay(100);
   toggleState_7 = 0; digitalWrite(RelayPin7, HIGH); pref.putBool("Relay7", toggleState_7); Blynk.virtualWrite(VPIN_BUTTON_7, toggleState_7); delay(100);
   toggleState_8 = 0; digitalWrite(RelayPin8, HIGH); pref.putBool("Relay8", toggleState_8); Blynk.virtualWrite(VPIN_BUTTON_8, toggleState_8); delay(100);
-  // currSpeed = 0; fanSpeedControl(currSpeed); pref.putInt("Fan", currSpeed); Blynk.virtualWrite(VPIN_BUTTON_FAN, currSpeed); delay(100);
-  // Blynk.virtualWrite(VPIN_HUMIDITY, humidity1);
-  // Blynk.virtualWrite(VPIN_TEMPERATURE, temperature1);
+}
+
+void all_SwitchOn(){
+  
+  toggleState_1 = 1; digitalWrite(RelayPin1, LOW); pref.putBool("Relay1", toggleState_1); Blynk.virtualWrite(VPIN_BUTTON_1, toggleState_1); delay(100);
+  toggleState_2 = 1; digitalWrite(RelayPin2, LOW); pref.putBool("Relay2", toggleState_2); Blynk.virtualWrite(VPIN_BUTTON_2, toggleState_2); delay(100);
+  toggleState_3 = 1; digitalWrite(RelayPin3, LOW); pref.putBool("Relay3", toggleState_3); Blynk.virtualWrite(VPIN_BUTTON_3, toggleState_3); delay(100);
+  toggleState_4 = 1; digitalWrite(RelayPin4, LOW); pref.putBool("Relay4", toggleState_4); Blynk.virtualWrite(VPIN_BUTTON_4, toggleState_4); delay(100);
+  toggleState_5 = 1; digitalWrite(RelayPin5, LOW); pref.putBool("Relay5", toggleState_5); Blynk.virtualWrite(VPIN_BUTTON_5, toggleState_5); delay(100);
+  toggleState_6 = 1; digitalWrite(RelayPin6, LOW); pref.putBool("Relay6", toggleState_6); Blynk.virtualWrite(VPIN_BUTTON_6, toggleState_6); delay(100);
+  toggleState_7 = 1; digitalWrite(RelayPin7, LOW); pref.putBool("Relay7", toggleState_7); Blynk.virtualWrite(VPIN_BUTTON_7, toggleState_7); delay(100);
+  toggleState_8 = 1; digitalWrite(RelayPin8, LOW); pref.putBool("Relay8", toggleState_8); Blynk.virtualWrite(VPIN_BUTTON_8, toggleState_8); delay(100);
 }
 
 void getRelayState()
@@ -514,7 +527,7 @@ void setup()
 {
   Serial.begin(9600);
   Serial.println("Booting...");
-  //WiFi.mode(WIFI_STA);
+  WiFi.mode(WIFI_STA);
 
   //Open namespace in read-write mode
   pref.begin("Relay_State", false);
