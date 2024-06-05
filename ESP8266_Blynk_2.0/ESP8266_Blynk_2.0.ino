@@ -13,16 +13,17 @@
  *  Blynk 1.0.1 Library:  https://github.com/blynkkk/blynk-library
  **********************************************************************************/
 
-/* Fill-in your Template ID (only if using Blynk.Cloud) */
+#include "credentials.h"
 
-#define BLYNK_TEMPLATE_ID ""
-#define BLYNK_TEMPLATE_NAME ""
-#define BLYNK_AUTH_TOKEN ""
+/* Fill-in your Template ID (only if using Blynk.Cloud) */
+#define BLYNK_TEMPLATE_ID TEMPLATE_ID
+#define BLYNK_TEMPLATE_NAME TEMPLATE_NAME
+#define BLYNK_AUTH_TOKEN AUTH_TOKEN
 
 // Your WiFi credentials.
 // Set password to "" for open networks.
-char ssid[] = "";
-char pass[] = "";
+char ssid[] = MY_SSID;
+char pass[] = MY_PASS;
 
 bool fetch_blynk_state = true;  //true or false
 
