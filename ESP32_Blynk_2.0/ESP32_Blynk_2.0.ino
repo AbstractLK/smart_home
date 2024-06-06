@@ -526,7 +526,7 @@ void getRelayState()
 void setup()
 {
   Serial.begin(9600);
-  Serial.println("Booting...");
+  Serial.println("Booting");
   WiFi.mode(WIFI_STA);
 
   //Open namespace in read-write mode
