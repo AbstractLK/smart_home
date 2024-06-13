@@ -59,9 +59,9 @@ Preferences pref;
 // decode_results results;
   
 // define the GPIO connected with Relays and switches
-#define RelayPin1 D1  //D1
-#define RelayPin2 4  //D2
-#define RelayPin3 14 //D5
+#define RelayPin1 14 //D1  //D1
+#define RelayPin2 D1 //4  //D2
+#define RelayPin3 4 //14 //D5
 #define RelayPin4 12 //D6
 
 #define SwitchPin1 1  //TX
@@ -77,7 +77,8 @@ Preferences pref;
 #define VPIN_BUTTON_3    V3 
 #define VPIN_BUTTON_4    V4
 
-#define VPIN_BUTTON_C    V5
+#define VPIN_BUTTON_C    V9
+#define VPIN_BUTTON_D    V10
 // #define VPIN_TEMPERATURE V6
 // #define VPIN_HUMIDITY    V7
 
@@ -131,14 +132,22 @@ BLYNK_WRITE(VPIN_BUTTON_4) {
 BLYNK_WRITE(VPIN_BUTTON_C) {
   all_SwitchOff();
 }
+BLYNK_WRITE(VPIN_BUTTON_D) {
+  all_SwitchOn();
+}
 
 void all_SwitchOff(){
   toggleState_1 = 0; digitalWrite(RelayPin1, HIGH); pref.putBool("Relay1", toggleState_1); Blynk.virtualWrite(VPIN_BUTTON_1, toggleState_1); delay(100);
   toggleState_2 = 0; digitalWrite(RelayPin2, HIGH); pref.putBool("Relay2", toggleState_2); Blynk.virtualWrite(VPIN_BUTTON_2, toggleState_2); delay(100);
   toggleState_3 = 0; digitalWrite(RelayPin3, HIGH); pref.putBool("Relay3", toggleState_3); Blynk.virtualWrite(VPIN_BUTTON_3, toggleState_3); delay(100);
   toggleState_4 = 0; digitalWrite(RelayPin4, HIGH); pref.putBool("Relay4", toggleState_4); Blynk.virtualWrite(VPIN_BUTTON_4, toggleState_4); delay(100);
-  // Blynk.virtualWrite(VPIN_HUMIDITY, humidity1);
-  // Blynk.virtualWrite(VPIN_TEMPERATURE, temperature1);
+}
+
+void all_SwitchOn(){
+  toggleState_1 = 1; digitalWrite(RelayPin1, LOW); pref.putBool("Relay1", toggleState_1); Blynk.virtualWrite(VPIN_BUTTON_1, toggleState_1); delay(100);
+  toggleState_2 = 1; digitalWrite(RelayPin2, LOW); pref.putBool("Relay2", toggleState_2); Blynk.virtualWrite(VPIN_BUTTON_2, toggleState_2); delay(100);
+  toggleState_3 = 1; digitalWrite(RelayPin3, LOW); pref.putBool("Relay3", toggleState_3); Blynk.virtualWrite(VPIN_BUTTON_3, toggleState_3); delay(100);
+  toggleState_4 = 1; digitalWrite(RelayPin4, LOW); pref.putBool("Relay4", toggleState_4); Blynk.virtualWrite(VPIN_BUTTON_4, toggleState_4); delay(100);
 }
 
 void checkBlynkStatus() { // called every 2 seconds by SimpleTimer
@@ -147,6 +156,8 @@ void checkBlynkStatus() { // called every 2 seconds by SimpleTimer
   if (isconnected == false) {
     wifiFlag = 1;
     Serial.println("Blynk Not Connected");
+    digitalWrite(wifiLed, LOW);
+    delay(200);
     digitalWrite(wifiLed, HIGH);
   }
   if (isconnected == true) {
